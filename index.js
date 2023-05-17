@@ -35,8 +35,14 @@ class Player {
     c.fill()
     c.closePath()
   }
-}
 
+
+  update() {
+    this.draw()
+    this.position.x += this.velocity.x
+    this.position.y += this.velocity.y
+  }
+}
 
 
 const map = [
@@ -76,17 +82,32 @@ map.forEach((row, i) => {
   })
 })
 
-boundaries.forEach(boundary => {
-  boundary.draw()
+function animate() {
+  requestAnimationFrame(animate)
+  boundaries.forEach(boundary => {
+    boundary.draw()
+  })
+
+  player.update()
+}
+
+animate()
+
+
+
+window.addEventListener('keydown', ({ key }) => {
+  switch (key) {
+    case 'w':
+      player.velocity.y = -5
+      break
+    case 'a':
+      player.velocity.x = -5
+      break
+    case 's':
+      player.velocity.y = 5
+      break
+    case 'd':
+      player.velocity.x = 5
+      break
+  }
 })
-
-// const boundary = new Boundary({
-//   position: {
-//     x: 0,
-//     y: 0
-//   }
-// })
-
-// boundary.draw()
-
-player.draw()
