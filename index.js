@@ -25,7 +25,7 @@ class Player {
   }) {
     this.position = position
     this.velocity = velocity
-    this.radius = 10
+    this.radius = 15
   }
 
   draw() {
@@ -50,8 +50,8 @@ const boundaries = []
 
 const player = new Player({
   position: {
-    x: 40,
-    y: 40
+    x: Boundary.width + Boundary.width / 2,
+    y: Boundary.height + Boundary.height / 2
   },
   velocity: {
     x: 0,
