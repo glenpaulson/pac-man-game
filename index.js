@@ -79,21 +79,29 @@ const keys = {
 
 let lastKey = ''
 
-const map = [
-  ['1', '-', '-', '-', '-', '-', '2'],
-  ['|', ' ', ' ', ' ', ' ', ' ', '|'],
-  ['|', ' ', 'b', ' ', 'b', ' ', '|'],
-  ['|', ' ', ' ', ' ', ' ', ' ', '|'],
-  ['|', ' ', 'b', ' ', 'b', ' ', '|'],
-  ['|', ' ', ' ', ' ', ' ', ' ', '|'],
-  ['4', '-', '-', '-', '-', '-', '3']
-]
+
 
 function createImg(src) {
   const image = new Image()
   image.src = src
   return image
 }
+
+const map = [
+  ['1', '-', '-', '-', '-', '-', '-', '-', '-', '-', '2'],
+  ['|', '.', '.', '.', '.', '.', '.', '.', '.', '.', '|'],
+  ['|', '.', 'b', '.', '[', '7', ']', '.', 'b', '.', '|'],
+  ['|', '.', '.', '.', '.', '_', '.', '.', '.', '.', '|'],
+  ['|', '.', '[', ']', '.', '.', '.', '[', ']', '.', '|'],
+  ['|', '.', '.', '.', '.', '^', '.', '.', '.', '.', '|'],
+  ['|', '.', 'b', '.', '[', '+', ']', '.', 'b', '.', '|'],
+  ['|', '.', '.', '.', '.', '_', '.', '.', '.', '.', '|'],
+  ['|', '.', '[', ']', '.', '.', '.', '[', ']', '.', '|'],
+  ['|', '.', '.', '.', '.', '^', '.', '.', '.', '.', '|'],
+  ['|', '.', 'b', '.', '[', '5', ']', '.', 'b', '.', '|'],
+  ['|', '.', '.', '.', '.', '.', '.', '.', '.', 'p', '|'],
+  ['4', '-', '-', '-', '-', '-', '-', '-', '-', '-', '3']
+]
 
 
 
@@ -164,9 +172,110 @@ map.forEach((row, i) => {
         }))
         break
 
+      case '[':
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: j * Boundary.width,
+              y: i * Boundary.height
+            },
+            image: createImg('./img/capLeft.png')
+          })
+        )
+        break
+      case ']':
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: j * Boundary.width,
+              y: i * Boundary.height
+            },
+            image: createImg('./img/capRight.png')
+          })
+        )
+        break
+      case '_':
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: j * Boundary.width,
+              y: i * Boundary.height
+            },
+            image: createImg('./img/capBottom.png')
+          })
+        )
+        break
+      case '^':
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: j * Boundary.width,
+              y: i * Boundary.height
+            },
+            image: createImg('./img/capTop.png')
+          })
+        )
+        break
+      case '+':
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: j * Boundary.width,
+              y: i * Boundary.height
+            },
+            image: createImg('./img/pipeCross.png')
+          })
+        )
+        break
+      case '5':
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: j * Boundary.width,
+              y: i * Boundary.height
+            },
+            color: 'blue',
+            image: createImg('./img/pipeConnectorTop.png')
+          })
+        )
+        break
+      case '6':
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: j * Boundary.width,
+              y: i * Boundary.height
+            },
+            color: 'blue',
+            image: createImg('./img/pipeConnectorRight.png')
+          })
+        )
+        break
+      case '7':
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: j * Boundary.width,
+              y: i * Boundary.height
+            },
+            color: 'blue',
+            image: createImg('./img/pipeConnectorBottom.png')
+          })
+        )
+        break
+      case '8':
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: j * Boundary.width,
+              y: i * Boundary.height
+            },
+            image: createImg('./img/pipeConnectorLeft.png')
+          })
+        )
+        break
 
     }
-    console.log(symbol)
   })
 })
 
