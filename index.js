@@ -402,8 +402,12 @@ function animate() {
     }
   }
 
-  pellets.forEach(pellet => {
+  pellets.forEach((pellet, i) => {
     pellet.draw()
+
+    if (Math.hypot(pellet.position.x - player.position.x, pellet.position.y - player.position.y) < pellet.radius + player.radius) {
+      pellets.splice(i, 1)
+    }
   })
 
   boundaries.forEach(boundary => {
@@ -421,7 +425,7 @@ function animate() {
   })
 
   player.update()
-  // player.velocity.y = 0 use this to stop movement on key up
+  // player.velocity.y = 0 //use this to stop movement on key up
   // player.velocity.x = 0
 
 
