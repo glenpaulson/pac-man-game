@@ -354,9 +354,9 @@ function circleCollidesWithRectangle({ circle, rectangle }) {
   )
 
 }
-
+let animationId
 function animate() {
-  requestAnimationFrame(animate)
+  animationid = requestAnimationFrame(animate)
   c.clearRect(0, 0, canvas.width, canvas.height)
 
   if (keys.w.pressed && lastKey === 'w') {
@@ -472,6 +472,12 @@ function animate() {
   player.update()
   ghosts.forEach(ghost => {
     ghost.update()
+
+    if (Math.hypot(ghost.position.x - player.position.x, ghost.position.y - player.position.y) < ghost.radius + player.radius) {
+      cancelAnimationFrame(animationId)
+      alert('you loose')
+    }
+
     const collisions = []
     boundaries.forEach(boundary => {
       if (
