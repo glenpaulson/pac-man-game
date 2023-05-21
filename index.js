@@ -482,6 +482,21 @@ function animate() {
     }
   }
 
+  //detect collision between ghost and player
+  for (let i = ghosts.length - 1; 0 <= i; i--) {
+    {
+      const ghost = ghosts[i]
+      if (Math.hypot(ghost.position.x - player.position.x, ghost.position.y - player.position.y) < ghost.radius + player.radius) {
+        if (ghost.scared) {
+          ghosts.splice(i, 1)
+        } else {
+          cancelAnimationFrame(animationId)
+          alert('you loose')
+        }
+      }
+    }
+  }
+
   //this is where power ups go
   for (let i = powerUps.length - 1; 0 <= i; i--) {
     const powerUp = powerUps[i]
@@ -534,10 +549,7 @@ function animate() {
     ghost.update()
 
     //ghost touches player
-    if (Math.hypot(ghost.position.x - player.position.x, ghost.position.y - player.position.y) < ghost.radius + player.radius && !ghost.scared) {
-      cancelAnimationFrame(animationId)
-      alert('you loose')
-    }
+
 
     const collisions = []
     boundaries.forEach(boundary => {
