@@ -103,6 +103,17 @@ const ghosts = [
       x: Ghost.speed,
       y: 0
     }
+  }),
+  new Ghost({
+    position: {
+      x: Boundary.width * 6 + Boundary.width / 2,
+      y: Boundary.height * 3 + Boundary.height / 2
+    },
+    velocity: {
+      x: Ghost.speed,
+      y: 0
+    },
+    color: 'orange'
   })
 ]
 
@@ -356,7 +367,7 @@ function circleCollidesWithRectangle({ circle, rectangle }) {
 }
 let animationId
 function animate() {
-  animationid = requestAnimationFrame(animate)
+  animationId = requestAnimationFrame(animate)
   c.clearRect(0, 0, canvas.width, canvas.height)
 
   if (keys.w.pressed && lastKey === 'w') {
@@ -542,7 +553,6 @@ function animate() {
       ghost.prevCollisions = collisions
 
     if (JSON.stringify(collisions) !== JSON.stringify(ghost.prevCollisions)) {
-      console.log('gogo')
       if (ghost.velocity.x > 0) {
         ghost.prevCollisions.push('right')
       } else if (ghost.velocity.x < 0) {
@@ -555,7 +565,6 @@ function animate() {
       const pathways = ghost.prevCollisions.filter(collision => {
         return !collisions.includes(collision)
       })
-      console.log('pathways', { pathways })
       const direction = pathways[Math.floor(Math.random() * pathways.length)]
       switch (direction) {
         case 'down':
