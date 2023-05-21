@@ -496,6 +496,10 @@ function animate() {
       }
     }
   }
+  if (pellets.length === 1) {
+    cancelAnimationFrame(animationId)
+    alert('You Win !!!')
+  }
 
   //this is where power ups go
   for (let i = powerUps.length - 1; 0 <= i; i--) {
