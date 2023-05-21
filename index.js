@@ -496,7 +496,7 @@ function animate() {
         ghost.scared = true
         setTimeout(() => {
           ghost.scared = false
-        }, 3000)
+        }, 5000)
       })
     }
   }
@@ -533,7 +533,8 @@ function animate() {
   ghosts.forEach(ghost => {
     ghost.update()
 
-    if (Math.hypot(ghost.position.x - player.position.x, ghost.position.y - player.position.y) < ghost.radius + player.radius) {
+    //ghost touches player
+    if (Math.hypot(ghost.position.x - player.position.x, ghost.position.y - player.position.y) < ghost.radius + player.radius && !ghost.scared) {
       cancelAnimationFrame(animationId)
       alert('you loose')
     }
